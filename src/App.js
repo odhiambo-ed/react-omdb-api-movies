@@ -1,6 +1,8 @@
 import './App.css';
 import { useState } from 'react';
 import MovieList from './components/MovieList';
+import MovieHeader from './components/MovieHeader';
+import SeachBar from './components/SearchBar';
 
 function App( props ) {
   const [movies, setMovies] = useState([
@@ -77,7 +79,13 @@ function App( props ) {
   ]);
   return (
     <div className="App">
-      <MovieList movies={movies} />
+      <div className="row">
+        <MovieHeader heading="Movies" />
+        <SeachBar searchValue={searchValue} />
+      </div>
+      <div className="row">
+        <MovieList movies={movies} />
+      </div>
     </div>
   );
 }
