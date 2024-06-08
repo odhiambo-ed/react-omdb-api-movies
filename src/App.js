@@ -11,7 +11,7 @@ function App( props ) {
     <div className="App">
       <div className="row">
         <MovieHeader heading="Movies" />
-        <SeachBar searchValue={searchValue} />
+        <SeachBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">
         <MovieList movies={movies} />
