@@ -1,8 +1,15 @@
 import React from 'react'
 
-function SearchBar() {
+function SearchBar(props) {
   return (
-    <div>SearchBar</div>
+      <div>
+          <input
+              type="text"
+              value={props.searchValue}
+              placeholder="Search..."
+              onChange={(event) => props.setSearchValue(event.target.value)}
+          />
+    </div>
   )
 }
 
