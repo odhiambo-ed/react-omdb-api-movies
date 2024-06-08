@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MovieList from './components/MovieList';
 import MovieHeader from './components/MovieHeader';
 import SeachBar from './components/SearchBar';
@@ -19,7 +19,9 @@ function App( props ) {
     }
   };
 
-
+  useEffect(() => {
+    getMovieRequest(searchValue);
+  }, [searchValue]);
   return (
     <div className="App">
       <div className="row">
