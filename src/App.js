@@ -7,6 +7,19 @@ import SeachBar from './components/SearchBar';
 function App( props ) {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+
+  const getMovieRequest = async (searchValue) => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=b160c966`;
+
+    const response = await fetch(url);
+    const responseJson = await response.json();
+
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+    }
+  };
+
+
   return (
     <div className="App">
       <div className="row">
