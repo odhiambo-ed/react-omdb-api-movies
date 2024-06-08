@@ -1,7 +1,8 @@
 import './App.css';
 import { useState } from 'react';
+import MovieList from './components/MovieList';
 
-function App() {
+function App( props ) {
   const [movies, setMovies] = useState([
     {
       "Title": "Star Wars: Empire at War",
@@ -76,18 +77,7 @@ function App() {
   ]);
   return (
     <div className="App">
-      <h1>Movie List</h1>
-      <ul>
-        {movies.map((movie, index) => {
-          return (
-            <li key={index}>
-              <h2>{movie.Title}</h2>
-              <p>{movie.Year}</p>
-              <img src={movie.Poster} alt={movie.Title} />
-            </li>
-          );
-        })}
-      </ul>
+      <MovieList movies={movies} />
     </div>
   );
 }
