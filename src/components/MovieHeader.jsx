@@ -1,8 +1,10 @@
 import React from 'react'
 
-function MovieHeader() {
+function MovieHeader(props) {
   return (
-    <div>MovieHeader</div>
+      <div>
+        <h1>{props.heading}</h1>
+    </div>
   )
 }
 
