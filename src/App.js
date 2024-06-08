@@ -6,6 +6,7 @@ import SeachBar from './components/SearchBar';
 
 function App( props ) {
   const [movies, setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
   return (
     <div className="App">
       <div className="row">
