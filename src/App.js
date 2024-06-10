@@ -7,6 +7,7 @@ import SeachBar from './components/SearchBar';
 function App( props ) {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [favourites, setFavourites] = useState([]);
 
   const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=b160c966`;
@@ -22,6 +23,11 @@ function App( props ) {
   useEffect(() => {
     getMovieRequest(searchValue);
   }, [searchValue]);
+
+  const AddFavourite = (movie) => { 
+    const newFavouriteList = [...favourites, movie];
+    setFavourites(newFavouriteList);
+  };
   return (
     <div className="App">
       <div className="row">
@@ -29,7 +35,11 @@ function App( props ) {
         <SeachBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">
-        <MovieList movies={movies} />
+        <MovieList
+          movies={movies}
+          favouriteComponent={AddFavourite}
+          handleFavouritesClick={addFavourite}
+        />
       </div>
     </div>
   );
