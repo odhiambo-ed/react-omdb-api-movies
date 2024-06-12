@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function MovieHeader(props) {
   return (
-      <div>
-        <h1>{props.heading}</h1>
+    <div className="col-12">
+      <h1>{props.heading}</h1>
     </div>
-  )
+  );
 }
 
-export default MovieHeader
+export default MovieHeader;
