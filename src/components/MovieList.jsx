@@ -1,4 +1,5 @@
 import React from 'react'
+import AddFavourite from './AddFavourite';
 
 function MovieList( props ) {
   return (
@@ -8,9 +9,14 @@ function MovieList( props ) {
         {props.movies.map((movie, index) => {
           return (
             <li key={index}>
-              <h2>{movie.Title}</h2>
+              <h6>{movie.Title}</h6>
               <p>{movie.Year}</p>
               <img src={movie.Poster} alt={movie.Title} />
+              <div
+                onClick={() => props.handleFavouritesClick(movie)}
+              >
+                <AddFavourite />
+              </div>
             </li>
           );
         })}
