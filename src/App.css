@@ -32,7 +32,8 @@
   color: #6c757d;
 }
 
-.favourite-icon {
+.favourite-icon, .watchlist-icon {
   cursor: pointer;
   color: #dc3545;
+  margin-top: 10px;
 }
