@@ -2,10 +2,10 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import MovieList from './components/MovieList';
 import MovieHeader from './components/MovieHeader';
-import SeachBar from './components/SearchBar';
+import SearchBar from './components/SearchBar';
 import AddFavourite from './components/AddFavourite';
 
-function App( props ) {
+function App(props) {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [favourites, setFavourites] = useState([]);
@@ -25,31 +25,32 @@ function App( props ) {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
-  const AddFavouriteMovie = (movie) => { 
+  const addFavouriteMovie = (movie) => {
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
   };
+
   return (
-    <div className="App">
-      <div className="row">
+    <div className="App container">
+      <div className="row mb-4">
         <MovieHeader heading="Movies" />
-        <SeachBar searchValue={searchValue} setSearchValue={setSearchValue} />
+        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="row d-flex flex-row">
+      <div className="row">
         <MovieList
           movies={movies}
           favouriteComponent={AddFavourite}
-          handleFavouritesClick={AddFavouriteMovie}
+          handleFavouritesClick={addFavouriteMovie}
         />
       </div>
-      <div className="row">
+      <div className="row mt-4">
         <MovieHeader heading="Favourites" />
       </div>
-      <div className="row d-flex flex-row">
+      <div className="row">
         <MovieList
           movies={favourites}
         />
-        </div>
+      </div>
     </div>
   );
 }
