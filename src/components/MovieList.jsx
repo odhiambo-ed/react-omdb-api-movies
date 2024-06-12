@@ -1,5 +1,6 @@
 import React from "react";
 import AddFavourite from "./AddFavourite";
+import AddWatchList from "./AddWatchList";
 
 function MovieList(props) {
   return (
@@ -9,11 +10,19 @@ function MovieList(props) {
           <h6>{movie.Title}</h6>
           <p>{movie.Year}</p>
           <img src={movie.Poster} alt={movie.Title} />
-          <div
-            onClick={() => props.handleFavouritesClick(movie)}
-            className="favourite-icon"
-          >
-            <AddFavourite />
+          <div className="d-flex flex-row justify-content-between">
+            <div
+              onClick={() => props.handleFavouritesClick(movie)}
+              className="favourite-icon"
+            >
+              <AddFavourite />
+            </div>
+            <div
+              onClick={() => props.handleWatchlistClick(movie)}
+              className="watchlist-icon"
+            >
+              <AddWatchList />
+            </div>
           </div>
         </div>
       ))}
