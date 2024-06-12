@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import MovieList from './components/MovieList';
 import MovieHeader from './components/MovieHeader';
 import SeachBar from './components/SearchBar';
+import AddFavourite from './components/AddFavourite';
 
 function App( props ) {
   const [movies, setMovies] = useState([]);
@@ -24,7 +25,7 @@ function App( props ) {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
-  const AddFavourite = (movie) => { 
+  const AddFavouriteMovie = (movie) => { 
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
   };
@@ -34,11 +35,11 @@ function App( props ) {
         <MovieHeader heading="Movies" />
         <SeachBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="row">
+      <div className="row d-flex flex-row">
         <MovieList
           movies={movies}
           favouriteComponent={AddFavourite}
-          handleFavouritesClick={addFavourite}
+          handleFavouritesClick={AddFavouriteMovie}
         />
       </div>
     </div>
