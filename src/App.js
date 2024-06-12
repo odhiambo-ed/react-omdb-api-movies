@@ -42,6 +42,14 @@ function App( props ) {
           handleFavouritesClick={AddFavouriteMovie}
         />
       </div>
+      <div className="row">
+        <MovieHeader heading="Favourites" />
+      </div>
+      <div className="row d-flex flex-row">
+        <MovieList
+          movies={favourites}
+        />
+        </div>
     </div>
   );
 }
