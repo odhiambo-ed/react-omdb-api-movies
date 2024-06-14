@@ -88,8 +88,8 @@ function App() {
       <div className="row">
         <MovieList
           movies={favourites}
-          favouriteComponent={RemoveFavourite} // Change to RemoveFavourite component
-          handleFavouritesClick={removeFavouriteMovie} // Correctly handle removing favourites
+          handleFavouritesClick={removeFavouriteMovie}
+          favouriteComponent={RemoveFavourite}
         />
       </div>
       <div className="row mt-4">
