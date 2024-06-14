@@ -1,8 +1,9 @@
 import React from "react";
-import AddFavourite from "./AddFavourite";
 import AddWatchList from "./AddWatchList";
 
 function MovieList(props) {
+  const FavouriteComponent = props.favouriteComponent;
+
   return (
     <div className="movie-list">
       {props.movies.map((movie, index) => (
@@ -15,14 +16,16 @@ function MovieList(props) {
               onClick={() => props.handleFavouritesClick(movie)}
               className="favourite-icon"
             >
-              <AddFavourite />
+              <FavouriteComponent />
             </div>
-            <div
-              onClick={() => props.handleWatchlistClick(movie)}
-              className="watchlist-icon"
-            >
-              <AddWatchList />
-            </div>
+            {props.handleWatchlistClick && (
+              <div
+                onClick={() => props.handleWatchlistClick(movie)}
+                className="watchlist-icon"
+              >
+                <AddWatchList />
+              </div>
+            )}
           </div>
         </div>
       ))}
