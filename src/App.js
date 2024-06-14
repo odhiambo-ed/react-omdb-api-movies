@@ -4,7 +4,6 @@ import MovieList from './components/MovieList';
 import MovieHeader from './components/MovieHeader';
 import SearchBar from './components/SearchBar';
 import AddFavourite from './components/AddFavourite';
-import AddWatchList from './components/AddWatchList';
 import RemoveFavourite from './components/RemoveFavourite';
 
 function App() {
@@ -46,7 +45,7 @@ function App() {
     setWatchlist(newWatchlist);
   };
 
-  const removeFavouriteMovie = (movie) => { 
+  const removeFavouriteMovie = (movie) => {
     const newFavouriteList = favourites.filter(
       (favourite) => favourite.imdbID !== movie.imdbID
     );
@@ -89,9 +88,8 @@ function App() {
       <div className="row">
         <MovieList
           movies={favourites}
-          favouriteComponent={AddFavourite}
-          handleFavouritesClick={removeFavouriteMovie}
-          handleWatchlistClick={RemoveFavourite}
+          favouriteComponent={RemoveFavourite} // Change to RemoveFavourite component
+          handleFavouritesClick={removeFavouriteMovie} // Correctly handle removing favourites
         />
       </div>
       <div className="row mt-4">
@@ -100,6 +98,9 @@ function App() {
       <div className="row">
         <MovieList
           movies={watchlist}
+          favouriteComponent={AddFavourite} // Assuming you want the AddFavourite component here too
+          handleFavouritesClick={addFavouriteMovie} // Assuming the same handler as adding to favourites
+          handleWatchlistClick={addWatchlistMovie} // Assuming the same handler as adding to watchlist
         />
       </div>
     </div>
