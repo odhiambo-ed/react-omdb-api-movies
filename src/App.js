@@ -38,11 +38,13 @@ function App() {
   const addFavouriteMovie = (movie) => {
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   const addWatchlistMovie = (movie) => {
     const newWatchlist = [...watchlist, movie];
     setWatchlist(newWatchlist);
+    saveToLocalStorage(newWatchlist);
   };
 
   const removeFavouriteMovie = (movie) => {
@@ -51,6 +53,7 @@ function App() {
     );
 
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   const saveToLocalStorage = (items) => { 
