@@ -35,16 +35,29 @@ function App() {
     getMovieRequest(searchValue, type, year);
   }, [searchValue, type, year]);
 
+  useEffect(() => {
+    const movieFavourites = JSON.parse(localStorage.getItem('react-movie-app-favourites'));
+    const movieWatchlist = JSON.parse(localStorage.getItem('react-movie-app-watchlist'));
+
+    if (movieFavourites) {
+      setFavourites(movieFavourites);
+    }
+
+    if (movieWatchlist) {
+      setWatchlist(movieWatchlist);
+    }
+  }, []);
+
   const addFavouriteMovie = (movie) => {
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
+    saveToLocalStorage('react-movie-app-favourites', newFavouriteList);
   };
 
   const addWatchlistMovie = (movie) => {
     const newWatchlist = [...watchlist, movie];
     setWatchlist(newWatchlist);
-    saveToLocalStorage(newWatchlist);
+    saveToLocalStorage('react-movie-app-watchlist', newWatchlist);
   };
 
   const removeFavouriteMovie = (movie) => {
@@ -53,11 +66,11 @@ function App() {
     );
 
     setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
+    saveToLocalStorage('react-movie-app-favourites', newFavouriteList);
   };
 
-  const saveToLocalStorage = (items) => { 
-    localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
+  const saveToLocalStorage = (key, items) => {
+    localStorage.setItem(key, JSON.stringify(items));
   };
 
   return (
@@ -107,7 +120,7 @@ function App() {
           movies={watchlist}
           favouriteComponent={AddFavourite}
           handleFavouritesClick={addFavouriteMovie}
-          handleWatchlistClick={addWatchlistMovie} 
+          handleWatchlistClick={addWatchlistMovie}
         />
       </div>
     </div>
