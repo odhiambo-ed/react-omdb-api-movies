@@ -5,6 +5,7 @@ import MovieHeader from './components/MovieHeader';
 import SearchBar from './components/SearchBar';
 import AddFavourite from './components/AddFavourite';
 import RemoveFavourite from './components/RemoveFavourite';
+import AddWatchList from './components/AddWatchList';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -96,12 +97,13 @@ function App() {
           />
         </div>
       </div>
-      <div className="row">
+      <div className="row d-flex flex-row">
         <MovieList
           movies={movies}
           favouriteComponent={AddFavourite}
           handleFavouritesClick={addFavouriteMovie}
           handleWatchlistClick={addWatchlistMovie}
+          AddWatchlist={AddWatchList}
         />
       </div>
       <div className="row mt-4">
@@ -123,6 +125,7 @@ function App() {
           favouriteComponent={AddFavourite}
           handleFavouritesClick={addFavouriteMovie}
           handleWatchlistClick={addWatchlistMovie}
+          AddWatchlist={AddWatchList}
         />
       </div>
     </div>
