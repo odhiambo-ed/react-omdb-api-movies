@@ -53,13 +53,17 @@ function App() {
     setFavourites(newFavouriteList);
   };
 
+  const saveToLocalStorage = (items) => { 
+    localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
+  };
+
   return (
     <div className="App container">
       <div className="row mb-4">
         <MovieHeader heading="Movies" />
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
         {/* Add filters for type and year */}
-        <div className="col-12">
+        <div className="">
           <select onChange={(e) => setType(e.target.value)} className="form-control">
             <option value="">All</option>
             <option value="movie">Movies</option>
@@ -98,9 +102,9 @@ function App() {
       <div className="row">
         <MovieList
           movies={watchlist}
-          favouriteComponent={AddFavourite} // Assuming you want the AddFavourite component here too
-          handleFavouritesClick={addFavouriteMovie} // Assuming the same handler as adding to favourites
-          handleWatchlistClick={addWatchlistMovie} // Assuming the same handler as adding to watchlist
+          favouriteComponent={AddFavourite}
+          handleFavouritesClick={addFavouriteMovie}
+          handleWatchlistClick={addWatchlistMovie} 
         />
       </div>
     </div>
