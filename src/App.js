@@ -15,14 +15,16 @@ function App() {
   const [year, setYear] = useState('');
 
   const getMovieRequest = async (searchValue, type, year, page = 1) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&type=${type}&y=${year}&page=${page}&apikey=b160c966`;
+    const apiKey = 'df04dcd1e7d517b58e2844f68f431c25';
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchValue}&year=${year}&page=${page}`;
 
     try {
       const response = await fetch(url);
       const responseJson = await response.json();
 
-      if (responseJson.Search) {
-        setMovies(responseJson.Search);
+      if (responseJson.results) {
+        setMovies(responseJson.results);
+        console.log(responseJson.results);
       } else {
         console.log('No results found');
       }
@@ -62,7 +64,7 @@ function App() {
 
   const removeFavouriteMovie = (movie) => {
     const newFavouriteList = favourites.filter(
-      (favourite) => favourite.imdbID !== movie.imdbID
+      (favourite) => favourite.id !== movie.id
     );
 
     setFavourites(newFavouriteList);
@@ -74,58 +76,56 @@ function App() {
   };
 
   return (
-    <body>
-      <div className="App container">
-        <div className="row mb-4">
-          <MovieHeader heading="Movies" />
-          <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-          {/* Add filters for type and year */}
-          <div className="">
-            <select onChange={(e) => setType(e.target.value)} className="form-control">
-              <option value="">All</option>
-              <option value="movie">Movies</option>
-              <option value="series">Series</option>
-              <option value="episode">Episodes</option>
-            </select>
-            <input
-              type="number"
-              placeholder="Year"
-              onChange={(e) => setYear(e.target.value)}
-              className="form-control"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <MovieList
-            movies={movies}
-            favouriteComponent={AddFavourite}
-            handleFavouritesClick={addFavouriteMovie}
-            handleWatchlistClick={addWatchlistMovie}
-          />
-        </div>
-        <div className="row mt-4">
-          <MovieHeader heading="Favourites" />
-        </div>
-        <div className="row">
-          <MovieList
-            movies={favourites}
-            handleFavouritesClick={removeFavouriteMovie}
-            favouriteComponent={RemoveFavourite}
-          />
-        </div>
-        <div className="row mt-4">
-          <MovieHeader heading="Watchlist" />
-        </div>
-        <div className="row">
-          <MovieList
-            movies={watchlist}
-            favouriteComponent={AddFavourite}
-            handleFavouritesClick={addFavouriteMovie}
-            handleWatchlistClick={addWatchlistMovie}
+    <div className="App container">
+      <div className="row mb-4">
+        <MovieHeader heading="Movies" />
+        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+        {/* Add filters for type and year */}
+        <div className="">
+          <select onChange={(e) => setType(e.target.value)} className="form-control">
+            <option value="">All</option>
+            <option value="movie">Movies</option>
+            <option value="series">Series</option>
+            <option value="episode">Episodes</option>
+          </select>
+          <input
+            type="number"
+            placeholder="Year"
+            onChange={(e) => setYear(e.target.value)}
+            className="form-control"
           />
         </div>
       </div>
-    </body>
+      <div className="row">
+        <MovieList
+          movies={movies}
+          favouriteComponent={AddFavourite}
+          handleFavouritesClick={addFavouriteMovie}
+          handleWatchlistClick={addWatchlistMovie}
+        />
+      </div>
+      <div className="row mt-4">
+        <MovieHeader heading="Favourites" />
+      </div>
+      <div className="row">
+        <MovieList
+          movies={favourites}
+          handleFavouritesClick={removeFavouriteMovie}
+          favouriteComponent={RemoveFavourite}
+        />
+      </div>
+      <div className="row mt-4">
+        <MovieHeader heading="Watchlist" />
+      </div>
+      <div className="row">
+        <MovieList
+          movies={watchlist}
+          favouriteComponent={AddFavourite}
+          handleFavouritesClick={addFavouriteMovie}
+          handleWatchlistClick={addWatchlistMovie}
+        />
+      </div>
+    </div>
   );
 }
 
