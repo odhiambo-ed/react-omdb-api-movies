@@ -1,5 +1,5 @@
-import React from "react";
-import Slider from "react-slick";
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
 
 const MovieList = ({
   movies,
@@ -8,46 +8,28 @@ const MovieList = ({
   handleWatchlistClick,
   AddWatchlist,
 }) => {
+  const movieItemsRef = useRef([]);
+
+  useEffect(() => {
+    // Animate movie items on mount
+    gsap.from(movieItemsRef.current, {
+      opacity: 0,
+      y: 50,
+      duration: 0.5,
+      stagger: 0.1,
+    });
+  }, [movies]);
+
   const FavouriteComponent = favouriteComponent;
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
-    <Slider {...settings}>
-      {movies.map((movie) => (
-        <div className="movie-item" key={movie.id}>
+    <div className="movie-list">
+      {movies.map((movie, index) => (
+        <div
+          className="movie-item"
+          key={movie.id}
+          ref={(el) => (movieItemsRef.current[index] = el)}
+        >
           <h6>{movie.title}</h6>
           <p>{movie.release_date}</p>
           <img
@@ -68,7 +50,7 @@ const MovieList = ({
           </div>
         </div>
       ))}
-    </Slider>
+    </div>
   );
 };
 
