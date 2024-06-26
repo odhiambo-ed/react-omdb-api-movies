@@ -46,7 +46,7 @@ const MovieList = ({
 
   return (
     <Slider {...settings}>
-      {movies.map((movie, index) => (
+      {movies.map((movie) => (
         <div className="movie-item" key={movie.id}>
           <h6>{movie.title}</h6>
           <p>{movie.release_date}</p>
