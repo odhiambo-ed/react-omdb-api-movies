@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 const MovieList = ({
   movies,
