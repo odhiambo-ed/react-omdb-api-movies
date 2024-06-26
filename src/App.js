@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { getTopRatedMovies } from './setup/Api';
 import MovieList from './components/MovieList';
 import MovieHeader from './components/MovieHeader';
 import SearchBar from './components/SearchBar';
@@ -8,47 +9,24 @@ import RemoveFavourite from './components/RemoveFavourite';
 import AddWatchList from './components/AddWatchList';
 
 function App() {
-  const [movies, setMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [favourites, setFavourites] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [type, setType] = useState('');
   const [year, setYear] = useState('');
 
-  const getMovieRequest = async (searchValue, type, year, page = 1) => {
-    const apiKey = 'df04dcd1e7d517b58e2844f68f431c25';
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchValue}&year=${year}&page=${page}`;
-
-    try {
-      const response = await fetch(url);
-      const responseJson = await response.json();
-
-      if (responseJson.results) {
-        setMovies(responseJson.results);
-        console.log(responseJson.results);
-      } else {
-        console.log('No results found');
+  useEffect(() => {
+    const fetchTopRatedMovies = async () => {
+      try {
+        const response = await getTopRatedMovies();
+        setTopRatedMovies(response.results.slice(0, 4));
+      } catch (error) {
+        console.error('Error fetching top-rated movies:', error);
       }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+    };
 
-  useEffect(() => {
-    getMovieRequest(searchValue, type, year);
-  }, [searchValue, type, year]);
-
-  useEffect(() => {
-    const movieFavourites = JSON.parse(localStorage.getItem('react-movie-app-favourites'));
-    const movieWatchlist = JSON.parse(localStorage.getItem('react-movie-app-watchlist'));
-
-    if (movieFavourites) {
-      setFavourites(movieFavourites);
-    }
-
-    if (movieWatchlist) {
-      setWatchlist(movieWatchlist);
-    }
+    fetchTopRatedMovies();
   }, []);
 
   const addFavouriteMovie = (movie) => {
@@ -81,7 +59,6 @@ function App() {
       <div className="row mb-4">
         <MovieHeader heading="Movies" />
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-        {/* Add filters for type and year */}
         <div className="">
           <select onChange={(e) => setType(e.target.value)} className="form-control">
             <option value="">All</option>
@@ -99,7 +76,7 @@ function App() {
       </div>
       <div className="row">
         <MovieList
-          movies={movies}
+          movies={topRatedMovies}
           favouriteComponent={AddFavourite}
           handleFavouritesClick={addFavouriteMovie}
           handleWatchlistClick={addWatchlistMovie}
@@ -108,8 +85,6 @@ function App() {
       </div>
       <div className="row mt-4">
         <MovieHeader heading="Favourites" />
-      </div>
-      <div className="row">
         <MovieList
           movies={favourites}
           handleFavouritesClick={removeFavouriteMovie}
@@ -118,8 +93,6 @@ function App() {
       </div>
       <div className="row mt-4">
         <MovieHeader heading="Watchlist" />
-      </div>
-      <div className="row">
         <MovieList
           movies={watchlist}
           favouriteComponent={AddFavourite}
