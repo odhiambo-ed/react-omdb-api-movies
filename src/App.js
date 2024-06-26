@@ -97,7 +97,7 @@ function App() {
           />
         </div>
       </div>
-      <div className="row d-flex flex-row">
+      <div className="row">
         <MovieList
           movies={movies}
           favouriteComponent={AddFavourite}
