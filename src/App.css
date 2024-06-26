@@ -12,7 +12,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* Center the movie items */
+  justify-content: center; 
 }
 
 .movie-item {
@@ -20,9 +20,8 @@ body {
   border: 1px solid #dee2e6;
   border-radius: 4px;
   padding: 10px;
-  width: 200px; /* Adjust the width as needed */
   text-align: center;
-  margin: 10px; /* Add margin to space out the items */
+  margin: 10px;
 }
 
 .movie-item img {
