@@ -14,7 +14,7 @@ const MovieList = ({
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4, // Number of slides to show at once
+    slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
       {
