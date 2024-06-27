@@ -1,20 +1,16 @@
 import axios from 'axios';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-const baseURL = 'https://api.themoviedb.org/3';
 
 const api = axios.create({
-    baseURL,
-    headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-    },
+    baseURL: 'https://api.themoviedb.org/3',
 });
 
 export const getTopRatedMovies = async (page = 1) => {
     try {
-        const response = await api.get(`/movie/top_rated`, {
+        const response = await api.get('/movie/top_rated', {
             params: {
+                api_key: apiKey,
                 language: 'en-US',
                 page,
             },
