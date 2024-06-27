@@ -1,5 +1,5 @@
 // components/HeroCarousel.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import { gsap } from "gsap";
 import "slick-carousel/slick/slick.css";
@@ -7,6 +7,29 @@ import "slick-carousel/slick/slick-theme.css";
 import "./HeroCarousel.css";
 
 const HeroCarousel = ({ movies }) => {
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slides = document.querySelectorAll(".slick-slide");
+    slides.forEach((slide) => {
+      gsap.fromTo(
+        slide,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1,
+          ease: "power3.inOut",
+          scrollTrigger: {
+            trigger: slide,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    });
+  }, []);
+
   const NextArrow = (props) => {
     const { onClick } = props;
     return (
@@ -45,7 +68,7 @@ const HeroCarousel = ({ movies }) => {
 
   return (
     <div className="hero-carousel">
-      <Slider {...settings}>
+      <Slider ref={sliderRef} {...settings}>
         {movies.map((movie) => (
           <div key={movie.id}>
             <img
