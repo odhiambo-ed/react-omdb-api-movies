@@ -45,3 +45,38 @@ body {
   color: #dc3545;
   margin-top: 10px;
 }
+
+/* App.css */
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-carousel-overlay {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-carousel-overlay h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-carousel-overlay p {
+  font-size: 1.5rem;
+}
+
+.movie-item {
+  position: relative;
+}
+
+.movie-item img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
