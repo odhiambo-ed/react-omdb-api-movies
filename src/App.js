@@ -8,6 +8,7 @@ import AddFavourite from './components/AddFavourite';
 import RemoveFavourite from './components/RemoveFavourite';
 import AddWatchList from './components/AddWatchList';
 import HeroCarousel from './components/HeroCarousel';
+import NavBar from './components/NavBar';
 
 function App() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -56,54 +57,57 @@ function App() {
   };
 
   return (
-    <div className="App container">
-      <HeroCarousel movies={topRatedMovies} />
-      <div className="row mb-4">
-        <MovieHeader heading="Movies" />
-        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-        <div className="">
-          <select onChange={(e) => setType(e.target.value)} className="form-control">
-            <option value="">All</option>
-            <option value="movie">Movies</option>
-            <option value="series">Series</option>
-            <option value="episode">Episodes</option>
-          </select>
-          <input
-            type="number"
-            placeholder="Year"
-            onChange={(e) => setYear(e.target.value)}
-            className="form-control"
+    <>
+      <NavBar />
+      <div className="App container">
+        <HeroCarousel movies={topRatedMovies} />
+        <div className="row mb-4">
+          <MovieHeader heading="Movies" />
+          <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+          <div className="">
+            <select onChange={(e) => setType(e.target.value)} className="form-control">
+              <option value="">All</option>
+              <option value="movie">Movies</option>
+              <option value="series">Series</option>
+              <option value="episode">Episodes</option>
+            </select>
+            <input
+              type="number"
+              placeholder="Year"
+              onChange={(e) => setYear(e.target.value)}
+              className="form-control"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <MovieList
+            movies={topRatedMovies}
+            favouriteComponent={AddFavourite}
+            handleFavouritesClick={addFavouriteMovie}
+            handleWatchlistClick={addWatchlistMovie}
+            AddWatchlist={AddWatchList}
+          />
+        </div>
+        <div className="row mt-4">
+          <MovieHeader heading="Favourites" />
+          <MovieList
+            movies={favourites}
+            handleFavouritesClick={removeFavouriteMovie}
+            favouriteComponent={RemoveFavourite}
+          />
+        </div>
+        <div className="row mt-4">
+          <MovieHeader heading="Watchlist" />
+          <MovieList
+            movies={watchlist}
+            favouriteComponent={AddFavourite}
+            handleFavouritesClick={addFavouriteMovie}
+            handleWatchlistClick={addWatchlistMovie}
+            AddWatchlist={AddWatchList}
           />
         </div>
       </div>
-      <div className="row">
-        <MovieList
-          movies={topRatedMovies}
-          favouriteComponent={AddFavourite}
-          handleFavouritesClick={addFavouriteMovie}
-          handleWatchlistClick={addWatchlistMovie}
-          AddWatchlist={AddWatchList}
-        />
-      </div>
-      <div className="row mt-4">
-        <MovieHeader heading="Favourites" />
-        <MovieList
-          movies={favourites}
-          handleFavouritesClick={removeFavouriteMovie}
-          favouriteComponent={RemoveFavourite}
-        />
-      </div>
-      <div className="row mt-4">
-        <MovieHeader heading="Watchlist" />
-        <MovieList
-          movies={watchlist}
-          favouriteComponent={AddFavourite}
-          handleFavouritesClick={addFavouriteMovie}
-          handleWatchlistClick={addWatchlistMovie}
-          AddWatchlist={AddWatchList}
-        />
-      </div>
-    </div>
+    </>
   );
 }
 
