@@ -12,8 +12,8 @@ const MovieList = ({
 
   useEffect(() => {
     // Animate movie items on mount
-    gsap.from(movieItemsRef.current, {
-      opacity: 0,
+    gsap.to(movieItemsRef.current, {
+      opacity: 1,
       y: 50,
       duration: 0.5,
       stagger: 0.1,
