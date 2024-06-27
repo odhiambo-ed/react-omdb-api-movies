@@ -1,7 +1,8 @@
+/* HeroCarousel.css */
 .hero-carousel {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   overflow: hidden;
 }
 
@@ -11,6 +12,9 @@
   left: 10%;
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s, transform 1s;
 }
 
 .hero-carousel-overlay h2 {
@@ -22,9 +26,14 @@
   font-size: 1.5rem;
 }
 
+.slick-active .hero-carousel-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
