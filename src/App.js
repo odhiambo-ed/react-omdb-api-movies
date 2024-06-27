@@ -7,6 +7,7 @@ import SearchBar from './components/SearchBar';
 import AddFavourite from './components/AddFavourite';
 import RemoveFavourite from './components/RemoveFavourite';
 import AddWatchList from './components/AddWatchList';
+import HeroCarousel from './components/HeroCarousel';
 
 function App() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -56,6 +57,7 @@ function App() {
 
   return (
     <div className="App container">
+      <HeroCarousel movies={topRatedMovies} />
       <div className="row mb-4">
         <MovieHeader heading="Movies" />
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
